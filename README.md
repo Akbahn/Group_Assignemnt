@@ -6,11 +6,12 @@ Things that are working:
 - Added menu for changing character (not working)
 - Character(s) can move with w,a,s,d
 - Both Maze pic are uploaded and showing
+- Change direction when character is moving
 
 Things to work on:
 - Adding collison to characters
 - Algorithm to auto solve maze
 - Allow user to change characters (robot or car)
-- change direction when character is moving
+
 
 
