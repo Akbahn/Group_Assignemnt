@@ -39,20 +39,23 @@ public class LayoutController {
     @FXML
     void movement(KeyEvent event) {
         Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
-
         if (selectedTab == tab01) {
             switch (event.getCode()) {
                 case W:
                     robot.setY(robot.getY() - 10);
+                    robot.setRotate(0);
                     break;
                 case S:
                     robot.setY(robot.getY() + 10);
+                    robot.setRotate(180);
                     break;
                 case A:
                     robot.setX(robot.getX() - 10);
+                    robot.setRotate(270);
                     break;
                 case D:
                     robot.setX(robot.getX() + 10);
+                    robot.setRotate(90);
                     break;
                 default:
                     break;
@@ -61,15 +64,23 @@ public class LayoutController {
             switch (event.getCode()) {
                 case W:
                     car.setY(car.getY() - 10);
+                    car.setScaleY(1);
+                    car.setRotate(270);
                     break;
                 case S:
                     car.setY(car.getY() + 10);
+                    car.setScaleY(1);
+                    car.setRotate(90);
                     break;
                 case A:
                     car.setX(car.getX() - 10);
+                    car.setScaleY(-1);
+                    car.setRotate(180);
                     break;
                 case D:
                     car.setX(car.getX() + 10);
+                    car.setScaleY(1);
+                    car.setRotate(0);
                     break;
                 default:
                     break;
