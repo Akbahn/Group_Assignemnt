@@ -2,16 +2,17 @@ CSE 311 Maze Group Project
 
 Team Members: Hyder, Abdul, Vincent, Khalid, Nadir
 
+Clean-up and Changing Characters
 Things that are working:
-- Added menu for changing character (not working)
+- Added menu for changing character (can go from robot -> car but not car-> robot; added some debugging code to help)
 - Character(s) can move with w,a,s,d
 - Both Maze pic are uploaded and showing
-- Change direction when character is moving
+- change direction when character is moving
 
 Things to work on:
 - Adding collison to characters
 - Algorithm to auto solve maze
-- Allow user to change characters (robot or car)
+- Solve getting car -> robot working
 
 
 
