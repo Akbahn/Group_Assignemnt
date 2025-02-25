@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.PixelReader;
 import javafx.scene.input.KeyEvent;
 import javafx.event.ActionEvent;
+import javafx.scene.paint.Color;
 
 public class LayoutController {
 
@@ -77,8 +79,6 @@ public class LayoutController {
     }
 
 
-
-
     @FXML
     void selectCar(ActionEvent event) {
         menuSelect.setText(carSelect.getText());
@@ -99,57 +99,71 @@ public class LayoutController {
     }
 
 
+
+    @FXML
+    void solveMaze(ActionEvent event) {
+
+
+    }
     @FXML
     void movement(KeyEvent event) {
         Tab selectedTab = tabPane.getSelectionModel().getSelectedItem();
-        if (selectedTab == tab01) {
-            switch (event.getCode()) {
-                case W:
-                    characterImage01.setY(characterImage01.getY() - 10);
-                    characterImage01.setRotate(0);
+        ImageView character;
+        ImageView maze;
 
-                    break;
-                case S:
-                    characterImage01.setY(characterImage01.getY() + 10);
-                    characterImage01.setRotate(180);
-                    break;
-                case A:
-                    characterImage01.setX(characterImage01.getX() - 10);
-                    characterImage01.setRotate(270);
-                    break;
-                case D:
-                    characterImage01.setX(characterImage01.getX() + 10);
-                    characterImage01.setRotate(90);
-                    break;
-                default:
-                    break;
-            }
+        if (selectedTab == tab01) {
+            character = characterImage01;
+            maze = maze01;
         } else if (selectedTab == tab02) {
-            switch (event.getCode()) {
-                case W:
-                    characterImage02.setY(characterImage02.getY() - 10);
-                    characterImage02.setScaleY(1);
-                    characterImage02.setRotate(270);
-                    break;
-                case S:
-                    characterImage02.setY(characterImage02.getY() + 10);
-                    characterImage02.setScaleY(1);
-                    characterImage02.setRotate(90);
-                    break;
-                case A:
-                    characterImage02.setX(characterImage02.getX() - 10);
-                    characterImage02.setScaleY(-1);
-                    characterImage02.setRotate(180);
-                    break;
-                case D:
-                    characterImage02.setX(characterImage02.getX() + 10);
-                    characterImage02.setScaleY(1);
-                    characterImage02.setRotate(0);
-                    break;
-                default:
-                    break;
-            }
+            character = characterImage02;
+            maze = maze02;
+        } else {
+            return; // No valid tab selected
+        }
+
+        double newX = character.getX();
+        double newY = character.getY();
+
+        switch (event.getCode()) {
+            case W: // Move Up
+                newY -= 10;
+                character.setRotate(0);
+                break;
+            case S: // Move Down
+                newY += 10;
+                character.setRotate(180);
+                break;
+            case A: // Move Left
+                newX -= 10;
+                character.setRotate(270);
+                break;
+            case D: // Move Right
+                newX += 10;
+                character.setRotate(90);
+                break;
+            default:
+                return; // Ignore other keys
+        }
+
+        // Check if the next position is a valid white pixel before moving
+        if (isWhitePixel(maze, (int) newX, (int) newY)) {
+            character.setX(newX);
+            character.setY(newY);
         }
     }
+
+
+    private boolean isWhitePixel(ImageView maze, int x, int y) {
+        Image mazeImage = maze.getImage();
+        PixelReader pixelReader = mazeImage.getPixelReader();
+
+        if (pixelReader == null || x < 0 || y < 0 || x >= mazeImage.getWidth() || y >= mazeImage.getHeight()) {
+            return false; // Out of bounds
+        }
+
+        Color color = pixelReader.getColor(x, y);
+        return color.getRed() > 0.9 && color.getGreen() > 0.9 && color.getBlue() > 0.9; // White pixel check
+    }
+
 
 }

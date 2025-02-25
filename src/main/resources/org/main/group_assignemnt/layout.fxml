@@ -34,7 +34,7 @@
                     </items>
                   </MenuButton>
                   <Button fx:id="ChangeBtn" layoutX="540.0" layoutY="171.0" mnemonicParsing="false" onAction="#changeCharacters" text="Change" />
-                  <Button fx:id="autoSolveBtn" layoutX="532.0" layoutY="242.0" mnemonicParsing="false" text="Auto Solve" />
+                  <Button fx:id="autoSolveBtn" layoutX="532.0" layoutY="242.0" mnemonicParsing="false" onAction="#solveMaze" text="Auto Solve" />
                </children></AnchorPane>
       </content>
     </Tab>
